@@ -25,10 +25,15 @@
     "url": "https://github.com/jmartsch/lazyframeAdvanced/issues"
   },
   "homepage": "https://jmartsch.github.io/lazyframeAdvanced/",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development npx webpack",
+    "build": "cross-env NODE_ENV=production npx webpack"
+  },
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "babel-plugin-transform-object-assign": "^6.22.0",
     "babel-preset-env": "^1.7.0",
+    "cross-env": "^7.0.3",
     "css-loader": "^5.0.1",
     "eslint": "^7.18.0",
     "mini-css-extract-plugin": "^1.3.4",
