@@ -179,7 +179,9 @@ Set this to true if you want the resource to execute (for example video to play)
 * cd into the cloned directory
 * run `npm install`
 * make your changes in the script or the scss file
-* run `npm run build` or `npx webpack`
+  
+##Development server with live reload
+Use `npm run dev` to run a server with HMR. It uses vite https://vitejs.dev/ which includes the script as a JS module in modern browsers.
 
 ## License
 
