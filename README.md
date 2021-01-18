@@ -22,7 +22,9 @@ LazyframeAdvanced comes with brand-like themes for YouTube and other services.
 
 ### Why Advanced?
 
-The original Lazyframe library seems abandoned and the original author does not respond to questions or pull requests anymore. As there are some services missing and we wanted to make some improvements, we created our own version.
+The original Lazyframe library is good as it is.
+But there are some services missing and it still uses the slow scroll event listener.
+We wanted to make some improvements, so we created our own version.
 
 ## Installation Instructions
 1. [Install](#install)
@@ -48,7 +50,7 @@ JavaScript ES6 imports
 import lazyframe from 'lazyframeAdvanced';
 ```
 
-Include JavaScript in html
+Include the library directly
 
 ```html
 <script src="dist/lazyframe.min.js"></script>
@@ -89,7 +91,7 @@ General options and corresponding defaults
 
 ```js
 lazyframe(elements, {
-   apikey: undefined,
+   apikey: enterYourApiKeyHere,
    debounce: 250,
    lazyload: true,
 
@@ -142,7 +144,7 @@ Callback function with the thumbnail URL
 
 ### `data-vendor`
 
-Attribute for theming lazyframe. Currently supported values are `youtube`, `vimeo` and `vine`.
+Attribute for theming lazyframe. Currently supported values are `youtube` and `vimeo`.
 
 ### `data-title`
 
@@ -175,9 +177,9 @@ Set this to true if you want the resource to execute (for example video to play)
 ## Compile from source
 * clone the github repo
 * cd into the cloned directory
+* run `npm install`
 * make your changes in the script or the scss file
-* run `npx webpack`
-* copy scripts from dist folder
+* run `npm run build` or `npx webpack`
 
 ## License
 
