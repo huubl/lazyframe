@@ -6,7 +6,7 @@
   "jsnext:main": "src/lazyframe.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vb/lazyframe.git"
+    "url": "git+https://github.com/jmartsch/lazyframeAdvanced.git"
   },
   "keywords": [
     "lazyload",
@@ -15,17 +15,16 @@
     "iframe",
     "youtube",
     "vimeo",
-    "vine",
     "pagespeed",
     "pageload",
     "javascript"
   ],
-  "author": "Viktor Bergehall",
+  "author": "Jens Martsch and Viktor Bergehall",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/vb/lazyframe/issues"
+    "url": "https://github.com/jmartsch/lazyframeAdvanced/issues"
   },
-  "homepage": "https://vb.github.io/lazyframe",
+  "homepage": "https://jmartsch.github.io/lazyframeAdvanced/",
   "devDependencies": {
     "@babel/core": "^7.8.4",
     "babel-plugin-transform-object-assign": "^6.22.0",
