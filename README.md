@@ -181,9 +181,11 @@ Set this to true if you want the resource to execute (for example video to play)
 * make your changes in the script or the scss file
   
 ##Development server with live reload
+
 Use `npm run dev` to run a server with HMR. It uses vite https://vitejs.dev/ which includes the script as a JS module in modern browsers.
 
 ## License
 
 [MIT](https://opensource.org/licenses/MIT). © 2021 Jens Martsch
+
 [MIT](https://opensource.org/licenses/MIT). © 2016 Viktor Bergehall
