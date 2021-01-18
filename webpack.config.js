@@ -3,6 +3,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     entry: './src/lazyframe.js',
+    mode: 'production',
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'lazyframe.min.js'
