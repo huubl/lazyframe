@@ -233,6 +233,16 @@ const Lazyframe = () => {
 
   }
 
+  const frameObserver = new IntersectionObserver((entries, frameObserver) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        console.log(entry);
+        // const lazyImage = entry.target
+        // lazyImage.src = lazyImage.dataset.src
+      }
+    })
+  });
+
   function scroll() {
 
     const height = window.innerHeight;
@@ -291,6 +301,7 @@ const Lazyframe = () => {
     }
 
   }
+
 
   function build(lazyframe, loadImage) {
 
