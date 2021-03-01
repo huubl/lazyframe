@@ -240,7 +240,6 @@ const Lazyframe = () => {
           let el = entry.target;
           // el.settings.initialized = true;
           el.classList.add('lazyframe--loaded');
-          console.log(el);
           api(el);
           // const lazyImage = entry.target
           // lazyImage.src = lazyImage.dataset.src
@@ -249,8 +248,6 @@ const Lazyframe = () => {
     });
 
     const lazyframes = document.querySelectorAll(elements);
-    console.log(lazyframes);
-
     lazyframes.forEach(item => frameObserver.observe(item));
   }
 
