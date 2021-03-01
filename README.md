@@ -6,9 +6,10 @@ Dependency-free library for lazyloading iframes and embeds like YouTube, Vimeo, 
 
 Watch some examples here: [https://jmartsch.github.io/lazyframeAdvanced](https://jmartsch.github.io/lazyframeAdvanced)
 
-## Why?
+## Why do you need it?
 
-Because the JavaScript loaded from the external providers is big and takes much time to load. This slows down your site, even if your visitors don't want to see your beautiful videos.
+JavaScripts loaded from external providers like YouTube are big and slow down the loading time of your website, even if your visitors don't want to see your beautiful videos.
+This also negatively impacts your ranking on Google
 
 For example here are the number of requests and filesizes of some well-known services.
 
@@ -20,11 +21,18 @@ LazyframeAdvanced creates a responsive placeholder for embedded content and requ
 
 LazyframeAdvanced comes with brand-like themes for YouTube and other services.
 
-### Why Advanced?
+### Why is it advanced?
 
-The original Lazyframe library is good as it is.
-But there are some services missing and it still uses the slow scroll event listener.
-We wanted to make some improvements, so we created our own version.
+The original [Lazyframe library](https://github.com/vb/lazyframe) from [Viktor Bergehall](https://github.com/vb) is good as it is.
+But there are some things missing, that we needed to, so we created our own deviation.
+
+####What did we add or are we planning to add:
+
+* added codepen as a vendor 
+* remove vine, as it does not exist anymore 
+* use IntersectionObserver instead of the old and slow scroll event listener
+* add aspect ratios for the placeholders
+* make it compatible with a cookie consent banner and only load the frame if consent for a specific vendor cookie is given
 
 ## Installation Instructions
 1. [Install](#install)
@@ -130,7 +138,7 @@ Use these attributes on your HTML element like this:
 
 | attribute name | possible values | description |
 |---|---|---|
-| data-vendor | youtube, vimeo, codepen | Attribute for theming lazyframeAdvanced. Currently supported values are `youtube` and `vimeo`
+| data-vendor | youtube, vimeo, codepen | Attribute for theming lazyframeAdvanced. Currently supported values are `youtube`, `youtube_nocookie` and `vimeo`
 | data-title | string: anything you like | Attribute for custom title. Leave empty to get value from API 
 | data-thumbnail | string: url | URL of the thumbnail image you would like to show, before the video is loaded 
 | data-src | string: url | The source of what you want to lazyload
