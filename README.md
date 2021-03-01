@@ -39,7 +39,7 @@ We wanted to make some improvements, so we created our own version.
 NPM
 
 ```bash
-$ npm install git+https://github.com/jmartsch/lazyframeAdvanced.git
+npm install git+https://github.com/jmartsch/lazyframeAdvanced.git
 ```
 
 ### Import
@@ -101,34 +101,20 @@ lazyframe(elements, {
    onThumbnailLoad: (img) => console.log(img)
 })
 ```
+## possible options
 
-### `apikey`
+| option name | default value | description |
+|---|---|---|
+| apikey | string: empty | If you want to load a thumbnail and title for a YouTube video you'll have to have an API key with the YouTube data API library enabled. Get it from [here](https://console.developers.google.com/). _If you don't feel like getting a key, just use your own thumbnail and title in data-thumbnail and data-title attribute_
+| lazyload | boolean: true | Set this to `false` if you want all API calls and local images to be loaded on page load (instead of when the element is in view).
+| onLoad | function: empty | Callback function for when a element is initialized. 
+| onAppend | function: empty | Callback function for when the iframe is appended to DOM. 
+| onThumbnailLoad | function: empty | Callback function with the thumbnail URL. 
 
-If you want to load a thumbnail and title for a YouTube video you'll have to have an API key with the YouTube data API library enabled. Get it from [here](https://console.developers.google.com/)
 
-_If you don't feel like getting a key, just use your own thumbnail and title in data-thumbnail and data-title attribute_
+## Element-specific attributes
 
-### `debounce`
-
-Value (in milliseconds) for when the update function should run after the user has scrolled. [More here](https://css-tricks.com/the-difference-between-throttling-and-debouncing/)
-
-### `lazyload`
-
-Set this to `false` if you want all API calls and local images to be loaded on page load (instead of when the element is in view).
-
-### `onLoad`
-
-Callback function for when a element is initialized.
-
-### `onAppend`
-
-Callback function for when the iframe is appended to DOM.
-
-### `onThumbnailLoad`
-
-Callback function with the thumbnail URL
-
-## Element-specific options
+Use these attributes on your HTML element like this:
 
 ```html
 <div
@@ -142,29 +128,14 @@ Callback function with the thumbnail URL
 </div>
 ```
 
-### `data-vendor`
-
-Attribute for theming lazyframe. Currently supported values are `youtube` and `vimeo`.
-
-### `data-title`
-
-Attribute for custom title. Leave empty to get value from API.
-
-### `data-thumbnail`
-
-Attribute for custom thumbnail. Leave empty to get value from API.
-
-### `data-src`
-
-The source of what you want to lazyload.
-
-### `data-ratio`
-
-The ratio of the lazyframe. Possible values: 16:9, 4:3, 1:1
-
-### `data-initinview`
-
-Set this to true if you want the resource to execute (for example video to play) when the element is in view.
+| attribute name | possible values | description |
+|---|---|---|
+| data-vendor | youtube, vimeo, codepen | Attribute for theming lazyframeAdvanced. Currently supported values are `youtube` and `vimeo`
+| data-title | string: anything you like | Attribute for custom title. Leave empty to get value from API 
+| data-thumbnail | string: url | URL of the thumbnail image you would like to show, before the video is loaded 
+| data-src | string: url | The source of what you want to lazyload
+| data-ratio | string: url | The ratio of the lazyframe. Possible values: 16:9, 4:3, 1:1
+| data-initinview | boolean: true | Set this to true if you want the resource to execute (for example video to play) when the element is in view.
 
 ## Changelog
 * v1.1.901 betterify example page
