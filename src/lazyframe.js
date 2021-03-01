@@ -93,7 +93,7 @@ const Lazyframe = () => {
     }
 
     if (settings.lazyload) {
-      scroll();
+      initIntersectionObserver(elements);
     }
 
   }
@@ -233,74 +233,72 @@ const Lazyframe = () => {
 
   }
 
-  const frameObserver = new IntersectionObserver((entries, frameObserver) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        console.log(entry);
-        // const lazyImage = entry.target
-        // lazyImage.src = lazyImage.dataset.src
-      }
-    })
-  });
+  function initIntersectionObserver(elements) {
+    const frameObserver = new IntersectionObserver((entries, frameObserver) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          let el = entry.target;
+          // el.settings.initialized = true;
+          el.classList.add('lazyframe--loaded');
+          console.log(el);
+          api(el);
+          // const lazyImage = entry.target
+          // lazyImage.src = lazyImage.dataset.src
+        }
+      })
+    });
 
-  function scroll() {
+    const lazyframes = document.querySelectorAll(elements);
+    console.log(lazyframes);
 
-    const height = window.innerHeight;
-    let count = elements.length;
-    const initElement = (el, i) => {
-      el.settings.initialized = true;
-      el.el.classList.add('lazyframe--loaded');
-      count--;
-      api(el);
-
-      if (el.settings.initinview) {
-        el.el.click();
-      }
-
-      el.settings.onLoad.call(this, el);
-    };
-
-    elements
-      .filter(el => el.settings.y < height)
-      .forEach(initElement);
-
-    const onScroll = debounce(() => {
-
-      up = lastY < window.pageYOffset;
-      lastY = window.pageYOffset;
-
-      if (up) {
-        elements
-          .filter(el => el.settings.y < (height + lastY) && el.settings.initialized === false)
-          .forEach(initElement);
-      }
-
-      if (count === 0) {
-        window.removeEventListener('scroll', onScroll, false);
-      }
-
-    }, settings.debounce);
-
-    let lastY = 0;
-    let t = false, up = false;
-    window.addEventListener('scroll', onScroll, false);
-
-    function debounce(func, wait, immediate) {
-      let timeout;
-      return function () {
-        let context = this, args = arguments;
-        let later = function () {
-          timeout = null;
-          if (!immediate) func.apply(context, args);
-        };
-        let callNow = immediate && !timeout;
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-        if (callNow) func.apply(context, args);
-      };
-    }
-
+    lazyframes.forEach(item => frameObserver.observe(item));
   }
+
+  // function scroll() {
+  //
+  //   const height = window.innerHeight;
+  //   let count = elements.length;
+  //   const initElement = (el, i) => {
+  //     el.settings.initialized = true;
+  //     el.el.classList.add('lazyframe--loaded');
+  //     count--;
+  //     api(el);
+  //
+  //     if (el.settings.initinview) {
+  //       el.el.click();
+  //     }
+  //
+  //     el.settings.onLoad.call(this, el);
+  //   };
+  //
+  //   elements
+  //     .filter(el => el.settings.y < height)
+  //     .forEach(initElement);
+  //
+  //   const onScroll = debounce(() => {
+  //
+  //     up = lastY < window.pageYOffset;
+  //     lastY = window.pageYOffset;
+  //
+  //     if (up) {
+  //       elements
+  //         .filter(el => el.settings.y < (height + lastY) && el.settings.initialized === false)
+  //         .forEach(initElement);
+  //     }
+  //
+  //     if (count === 0) {
+  //       window.removeEventListener('scroll', onScroll, false);
+  //     }
+  //
+  //   }, settings.debounce);
+  //
+  //   let lastY = 0;
+  //   let t = false, up = false;
+  //   // window.addEventListener('scroll', onScroll, false);
+  //
+  //
+  //
+  // }
 
 
   function build(lazyframe, loadImage) {
