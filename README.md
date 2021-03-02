@@ -146,6 +146,7 @@ Use these attributes on your HTML element like this:
 | data-initinview | boolean: true | Set this to true if you want the resource to execute (for example video to play) when the element is in view.
 
 ## Changelog
+* v2.0 use IntersectionObserver instead of scroll listener, for better performance.
 * v1.1.901 betterify example page
 * v1.1.9 remove gulp and rollup and use webpack instead
     * use Babel 7
