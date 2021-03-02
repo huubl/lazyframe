@@ -17,7 +17,7 @@ For example here are the number of requests and filesizes of some well-known ser
 * **Google maps** – 52 requests ≈ 580kb
 * **Vimeo** – 8 requests ≈ 145kb
 
-LazyframeAdvanced creates a responsive placeholder for embedded content and requests it when the user interacts with it. This decreases the page load and idle time.
+LazyframeAdvanced creates a responsive placeholder for embedded content and requests it when the user interacts with it or it lazyloads if it is in view. This decreases the page load and idle time.
 
 LazyframeAdvanced comes with brand-like themes for YouTube and other services.
 
