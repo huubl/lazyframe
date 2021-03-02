@@ -24,10 +24,11 @@ LazyframeAdvanced comes with brand-like themes for YouTube and other services.
 ### Why is it advanced?
 
 The original [Lazyframe library](https://github.com/vb/lazyframe) from [Viktor Bergehall](https://github.com/vb) is good as it is.
-But there are some things missing, that we needed to, so we created our own deviation.
+But there are some things missing, that we needed, so we created our own deviation.
 
 ####What did we add or are we planning to add:
 
+* move to a modern and fast build stack with vite
 * added codepen as a vendor 
 * remove vine, as it does not exist anymore 
 * use IntersectionObserver instead of the old and slow scroll event listener
@@ -146,7 +147,6 @@ Use these attributes on your HTML element like this:
 | data-initinview | boolean: true | Set this to true if you want the resource to execute (for example video to play) when the element is in view.
 
 ## Changelog
-* v2.0 use IntersectionObserver instead of scroll listener, for better performance.
 * v1.1.901 betterify example page
 * v1.1.9 remove gulp and rollup and use webpack instead
     * use Babel 7
