@@ -48,7 +48,7 @@ But there are some things missing, that we needed, so we created our own deviati
 NPM
 
 ```bash
-npm install git+https://github.com/jmartsch/lazyframeAdvanced.git
+npm install lazyframe-advanced
 ```
 
 ### Import
@@ -56,10 +56,11 @@ npm install git+https://github.com/jmartsch/lazyframeAdvanced.git
 JavaScript ES6 imports
 
 ```js
-import lazyframe from 'lazyframeAdvanced';
+import lazyframe from 'lazyframe-advanced';
+import 'lazyframe-advanced/style.css'
 ```
 
-Include the library directly
+Include the library directly. Currently does not work. 
 
 ```html
 <script src="dist/lazyframe.min.js"></script>
