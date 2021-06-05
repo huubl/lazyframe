@@ -15,7 +15,6 @@ const Lazyframe = () => {
     apikey: undefined,
     initialized: false,
     parameters: undefined,
-    y: undefined,
     debounce: 250,
     lazyload: true,
     initinview: false,
@@ -76,36 +75,35 @@ const Lazyframe = () => {
 
       const selector = document.querySelectorAll(elements);
       for (let i = 0; i < selector.length; i++) {
-        loop(selector[i]);
+        initElement(selector[i]);
       }
 
     } else if (typeof elements.length === 'undefined') {
-      loop(elements);
+      initElement(elements);
 
     } else if (elements.length > 1) {
 
       for (let i = 0; i < elements.length; i++) {
-        loop(elements[i]);
+        initElement(elements[i]);
       }
 
     } else {
-      loop(elements[0]);
+      initElement(elements[0]);
     }
-
     if (settings.lazyload) {
       initIntersectionObserver(elements);
     }
 
   }
 
-  function loop(el) {
+  function initElement(el) {
 
     if (!(el instanceof HTMLElement) ||
       el.classList.contains('lazyframe--loaded')) return;
 
     const lazyframe = {
       el: el,
-      settings: setup(el),
+      settings: getSettings(el),
     };
 
     lazyframe.el.addEventListener('click', () => {
@@ -123,7 +121,8 @@ const Lazyframe = () => {
 
   }
 
-  function setup(el) {
+  function getSettings(el) {
+    console.log('getSettings: ', el);
 
     const attr = Array.prototype.slice.apply(el.attributes)
       .filter(att => att.value !== '')
@@ -137,7 +136,6 @@ const Lazyframe = () => {
       settings,
       attr,
       {
-        y: el.offsetTop,
         parameters: extractParams(attr.src)
       }
     );
@@ -183,7 +181,7 @@ const Lazyframe = () => {
   }
 
   function api(lazyframe) {
-
+    console.log(lazyframe.settings);
     if (useApi(lazyframe.settings)) {
       send(lazyframe, (err, data) => {
         if (err) return;
@@ -234,20 +232,30 @@ const Lazyframe = () => {
   }
 
   function initIntersectionObserver(elements) {
+    console.log("initIntersectionObserver");
     const frameObserver = new IntersectionObserver((entries, frameObserver) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           let el = entry.target;
-          // el.settings.initialized = true;
-          el.classList.add('lazyframe--loaded');
-          api(el);
+          if (!el.settings){
+            el.settings = getSettings(el);
+            el.el = el;
+            el.settings.initialized = true;
+            el.classList.add('lazyframe--loaded');
+            api(el);
+          }
+          if (el.settings.initinview) {
+            el.click();
+          }
+          el.settings.onLoad.call(this, el);
           // const lazyImage = entry.target
           // lazyImage.src = lazyImage.dataset.src
         }
       })
     });
 
-    const lazyframes = document.querySelectorAll(elements);
+    const lazyframes = document.querySelectorAll(elements + "[data-initinview]");
+    console.log('lazrframes die initinview haben', lazyframes);
     lazyframes.forEach(item => frameObserver.observe(item));
   }
 
@@ -303,6 +311,7 @@ const Lazyframe = () => {
     lazyframe.iframe = getIframe(lazyframe.settings);
 
     if (lazyframe.settings.thumbnail && loadImage) {
+      console.log(lazyframe.settings.thumbnail);
       lazyframe.el.style.backgroundImage = `url(${lazyframe.settings.thumbnail})`;
     }
 
