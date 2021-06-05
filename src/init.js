@@ -1,8 +1,8 @@
 import lazyframe from "./lazyframe";
 
 function initOnDomReady(){
-    lazyframe('.lazyframe', {
-        apikey: 'AIzaSyDQxRfx3HQrE0_oTFI2WHzoiGL_CM0JJfQ' // Sorry, will only work on this domain
+  lazyframe('.lazyframe', {
+        apikey: 'AIzaSyBGhYjnaop5mqT-IO_q3--OCrUhgopW_XQ' // Sorry, will only work on this domain
     });
 }
 
