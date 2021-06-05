@@ -122,7 +122,7 @@ const Lazyframe = () => {
   }
 
   function getSettings(el) {
-    console.log('getSettings: ', el);
+    // console.log('getSettings: ', el);
 
     const attr = Array.prototype.slice.apply(el.attributes)
       .filter(att => att.value !== '')
@@ -255,7 +255,7 @@ const Lazyframe = () => {
     });
 
     const lazyframes = document.querySelectorAll(elements + "[data-initinview]");
-    console.log('lazrframes die initinview haben', lazyframes);
+    // console.log('lazyframes that should be initialized when in view: ', lazyframes);
     lazyframes.forEach(item => frameObserver.observe(item));
   }
 
