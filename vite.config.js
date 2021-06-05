@@ -41,8 +41,12 @@ export default {
     https: true,
   },
   build: {
-    outDir: '../../dist/',
-    emptyOutDir: true,
+    lib: {
+      entry: path.resolve(__dirname, 'src/lazyframe.js'),
+      name: 'Lazyframe'
+    },
+    // outDir: '/dist/',
+    // emptyOutDir: true,
     assetsDir: './',
     // generate manifest.json in outDir
     manifest: false,
