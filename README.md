@@ -71,10 +71,10 @@ Sass import
 @import 'src/scss/lazyframe';
 ```
 
-Include css in html
+Include CSS in HTML
 
 ```html
-<link rel="stylesheet" href="dist/lazyframe.css">
+<link rel="stylesheet" href="dist/style.css">
 ```
 
 ### Initialize
