@@ -33,11 +33,11 @@ export default {
   //   // edit according to your source code
   // ],
   server: {
-    port: 3000,
+    // port: 3000,
     cors: true,
     // we need a strict port to match on PHP side
     // change freely, but update on PHP to match the same port
-    strictPort: true,
+    // strictPort: true,
     https: true,
   },
   build: {
