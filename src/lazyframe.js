@@ -1,4 +1,4 @@
-// import './scss/lazyframe.scss';
+import './scss/lazyframe.scss';
 
 const Lazyframe = () => {
 
@@ -234,7 +234,7 @@ const Lazyframe = () => {
   }
 
   function initIntersectionObserver(elements) {
-    console.log("initIntersectionObserver");
+    // console.log("initIntersectionObserver");
     const frameObserver = new IntersectionObserver((entries, frameObserver) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
