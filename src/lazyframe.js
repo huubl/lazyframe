@@ -183,7 +183,7 @@ const Lazyframe = () => {
   }
 
   function api(lazyframe) {
-    console.log(lazyframe.settings);
+    // console.log(lazyframe.settings);
     if (useApi(lazyframe.settings)) {
       send(lazyframe, (err, data) => {
         if (err) return;
