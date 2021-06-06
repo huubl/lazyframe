@@ -361,6 +361,6 @@ const Lazyframe = () => {
 
 };
 
-const lf = Lazyframe();
+const lazyframe = Lazyframe();
 window.lazyframe = Lazyframe();
-export default lf;
+export default lazyframe;
