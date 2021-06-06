@@ -26,14 +26,17 @@ LazyframeAdvanced comes with brand-like themes for YouTube and other services.
 The original [Lazyframe library](https://github.com/vb/lazyframe) from [Viktor Bergehall](https://github.com/vb) is good as it is.
 But there are some things missing, that we needed, so we created our own deviation.
 
-####What did we add or are we planning to add:
+#### What did we add
 
 * move to a modern and fast build stack with vite
 * added codepen as a vendor 
-* remove vine, as it does not exist anymore 
+* remove vine, as it does not exist anymore
+
+
+###  New features that we are planning to add:
 * use IntersectionObserver instead of the old and slow scroll event listener
 * add aspect ratios for the placeholders
-* make it compatible with a cookie consent banner and only load the frame if consent for a specific vendor cookie is given
+* make it compatible with a cookie consent banner like klaro and only load the frame if consent for a specific vendor cookie is given, else display a placeholder element that you can modify by yourself
 
 ## Installation Instructions
 1. [Install](#install)
