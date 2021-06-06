@@ -18,9 +18,12 @@ const Lazyframe = () => {
     debounce: 250,
     lazyload: true,
     initinview: false,
-    onLoad: (l) => { },
-    onAppend: (l) => { },
-    onThumbnailLoad: (img) => { }
+    onLoad: (l) => {
+    },
+    onAppend: (l) => {
+    },
+    onThumbnailLoad: (img) => {
+    }
   };
 
   const constants = {
@@ -237,7 +240,7 @@ const Lazyframe = () => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           let el = entry.target;
-          if (!el.settings){
+          if (!el.settings) {
             el.settings = getSettings(el);
             el.el = el;
             el.settings.initialized = true;
@@ -258,53 +261,6 @@ const Lazyframe = () => {
     // console.log('lazyframes that should be initialized when in view: ', lazyframes);
     lazyframes.forEach(item => frameObserver.observe(item));
   }
-
-  // function scroll() {
-  //
-  //   const height = window.innerHeight;
-  //   let count = elements.length;
-  //   const initElement = (el, i) => {
-  //     el.settings.initialized = true;
-  //     el.el.classList.add('lazyframe--loaded');
-  //     count--;
-  //     api(el);
-  //
-  //     if (el.settings.initinview) {
-  //       el.el.click();
-  //     }
-  //
-  //     el.settings.onLoad.call(this, el);
-  //   };
-  //
-  //   elements
-  //     .filter(el => el.settings.y < height)
-  //     .forEach(initElement);
-  //
-  //   const onScroll = debounce(() => {
-  //
-  //     up = lastY < window.pageYOffset;
-  //     lastY = window.pageYOffset;
-  //
-  //     if (up) {
-  //       elements
-  //         .filter(el => el.settings.y < (height + lastY) && el.settings.initialized === false)
-  //         .forEach(initElement);
-  //     }
-  //
-  //     if (count === 0) {
-  //       window.removeEventListener('scroll', onScroll, false);
-  //     }
-  //
-  //   }, settings.debounce);
-  //
-  //   let lastY = 0;
-  //   let t = false, up = false;
-  //   // window.addEventListener('scroll', onScroll, false);
-  //
-  //
-  //
-  // }
-
 
   function build(lazyframe, loadImage) {
 
