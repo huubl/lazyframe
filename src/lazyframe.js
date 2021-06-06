@@ -1,5 +1,6 @@
 import './scss/lazyframe.scss';
 
+console.log(import.meta.env.MODE);
 const Lazyframe = () => {
 
   let settings;
