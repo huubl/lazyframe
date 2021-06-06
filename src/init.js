@@ -1,4 +1,4 @@
-import lazyframe from "./lazyframe";
+import lazyframe from "./lazyframe.js";
 
 function initOnDomReady(){
   lazyframe('.lazyframe', {
