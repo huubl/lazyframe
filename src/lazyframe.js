@@ -15,7 +15,6 @@ const Lazyframe = () => {
     apikey: undefined,
     initialized: false,
     parameters: undefined,
-    debounce: 250,
     lazyload: true,
     initinview: false,
     onLoad: (l) => {

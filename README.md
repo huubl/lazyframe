@@ -105,9 +105,7 @@ General options and corresponding defaults
 ```js
 lazyframe(elements, {
    apikey: enterYourApiKeyHere,
-   debounce: 250,
    lazyload: true,
-
    // Callbacks
    onLoad: (lazyframe) => console.log(lazyframe),
    onAppend: (iframe) => console.log(iframe),
