@@ -25,7 +25,7 @@ export default {
   //   }
   // },
   // root: 'src/',
-  // base: process.env.NODE_ENV === 'development' ? '/' : '/dist/',
+  base: process.env.NODE_ENV === 'development' ? '/' : '/lazyframeAdvanced/',
 
   // plugins: [
   //   liveReload(__dirname+'/dist/site/templates/**/*.(php|tpl|html)'),
