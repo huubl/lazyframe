@@ -2,7 +2,7 @@
 
 [comment]: <> ([![npm version]&#40;https://badge.fury.io/js/lazyframeAdvanced.svg&#41;]&#40;https://badge.fury.io/js/lazyframeAdvanced&#41;)
 
-Dependency-free library for lazyloading iframes and embeds like YouTube, Vimeo, Twitter, Google Maps, Codepen etc.
+Dependency-free library for lazyloading iframes like YouTube, Vimeo, Twitter, Google Maps, Codepen etc.
 
 Watch some examples here: [https://jmartsch.github.io/lazyframeAdvanced](https://jmartsch.github.io/lazyframeAdvanced)
 
@@ -24,17 +24,17 @@ LazyframeAdvanced comes with brand-like themes for YouTube and other services.
 ### Why is it advanced?
 
 The original [Lazyframe library](https://github.com/vb/lazyframe) from [Viktor Bergehall](https://github.com/vb) is good as it is.
-But there are some things missing, that we needed, so we created our own deviation.
+But there were some features missing, that we needed, so we created our own deviation.
 
 #### What did we add
 
+* use IntersectionObserver instead of the old and slow scroll event listener
 * move to a modern and fast build stack with vite
 * added codepen as a vendor 
 * remove vine, as it does not exist anymore
 
 
 ###  New features that we are planning to add:
-* use IntersectionObserver instead of the old and slow scroll event listener
 * add aspect ratios for the placeholders
 * make it compatible with a cookie consent banner like klaro and only load the frame if consent for a specific vendor cookie is given, else display a placeholder element that you can modify by yourself
 
