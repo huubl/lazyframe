@@ -32,10 +32,10 @@ But there were some features missing, that we needed, so we created our own devi
 * move to a modern and fast build stack with vite
 * added codepen as a vendor 
 * remove vine, as it does not exist anymore
+* add aspect ratios for the placeholders
 
 
 ###  New features that we are planning to add:
-* add aspect ratios for the placeholders
 * make it compatible with a cookie consent banner like klaro and only load the frame if consent for a specific vendor cookie is given, else display a placeholder element that you can modify by yourself
 
 ## Installation Instructions
@@ -63,7 +63,7 @@ import lazyframe from 'lazyframe-advanced';
 import 'lazyframe-advanced/style.css'
 ```
 
-Include the library directly. Currently does not work. 
+Include the library directly. Currently does not work because there is no minified standalone version. 
 
 ```html
 <script src="dist/lazyframe.min.js"></script>
@@ -149,6 +149,7 @@ Use these attributes on your HTML element like this:
 | data-initinview | boolean: true | Set this to true if you want the resource to execute (for example video to play) when the element is in view.
 
 ## Changelog
+* v1.2.0 release on npm, moved to vitejs from webpack
 * v1.1.901 betterify example page
 * v1.1.9 remove gulp and rollup and use webpack instead
     * use Babel 7
