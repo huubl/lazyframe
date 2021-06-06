@@ -3,12 +3,12 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/my-lib.umd.js",
-  "module": "./dist/my-lib.es.js",
+  "main": "./dist/lazyframe-advanced.umd.js",
+  "module": "./dist/lazyframe-advanced.es.js",
   "exports": {
     ".": {
-      "import": "./dist/my-lib.es.js",
-      "require": "./dist/my-lib.umd.js"
+      "import": "./dist/lazyframe-advanced.es.js",
+      "require": "./dist/lazyframe-advanced.umd.js"
     }
   },
   "version": "1.2.1",
