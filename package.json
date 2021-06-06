@@ -11,7 +11,7 @@
       "require": "./dist/lazyframe-advanced.umd.js"
     }
   },
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Dependency-free library for lazyloading iframes",
   "repository": {
     "type": "git",
