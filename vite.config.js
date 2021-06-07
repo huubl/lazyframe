@@ -41,9 +41,14 @@ export default {
     https: true,
   },
   build: {
+    // input: {
+    //   'entry-point-a': path.resolve(__dirname, 'src/lazyframe.js'),
+    //   'entry-point-b': path.resolve(__dirname, 'src/scss/lazyframe.scss'),
+    // },
     lib: {
       entry: path.resolve(__dirname, 'src/lazyframe.js'),
-      name: 'Lazyframe'
+
+      name: 'lazyframe'
     },
     // outDir: '/dist/',
     // emptyOutDir: true,
@@ -52,7 +57,12 @@ export default {
     manifest: false,
     rollupOptions: {
       // overwrite default .html entry
-      input: './src/lazyframe.js'
+      input: './src/lazyframe.js',
+      output: {
+        exports: "default",
+        format: "es",
+        // entryFileNames: 'entry-[name].js'
+      }
     }
   }
 };

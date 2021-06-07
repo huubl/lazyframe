@@ -35,8 +35,9 @@
   },
   "homepage": "https://jmartsch.github.io/lazyframeAdvanced/",
   "scripts": {
+    "scss-compile": "node-sass-chokidar src/scss/ -o dist/",
     "dev": "cross-env NODE_ENV=development vite --host 0.0.0.0",
-    "build": "cross-env NODE_ENV=production vite build",
+    "build": "cross-env NODE_ENV=production vite build && npm run scss-compile",
     "serve": "vite preview",
     "test": "echo \"No test specified\""
   },
@@ -52,5 +53,8 @@
     "sass": "^1.34.1",
     "sass-loader": "^12.0.0",
     "vite": "^2.3.6"
+  },
+  "dependencies": {
+    "node-sass-chokidar": "^1.5.0"
   }
 }

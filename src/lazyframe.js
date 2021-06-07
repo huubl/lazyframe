@@ -1,11 +1,13 @@
-import './scss/lazyframe.scss';
+// if (import.meta.env.MODE !==''){
+//  import ('./scss/lazyframe.scss');
+// }
 
-console.log(import.meta.env.MODE);
+// console.log(import.meta.env.MODE);
 const Lazyframe = () => {
 
   let settings;
 
-  const elements = [];
+  let elements = [];
 
   const defaults = {
     vendor: undefined,
@@ -16,13 +18,14 @@ const Lazyframe = () => {
     apikey: undefined,
     initialized: false,
     parameters: undefined,
-    lazyload: true,
+    lazyload: false,
     initinview: false,
     onLoad: (l) => {
     },
     onAppend: (l) => {
     },
     onThumbnailLoad: (img) => {
+      // console.log(img);
     }
   };
 
@@ -73,7 +76,7 @@ const Lazyframe = () => {
 
   function init(elements, ...args) {
     settings = Object.assign({}, defaults, args[0]);
-
+    // console.log(typeof elements);
     if (typeof elements === 'string') {
 
       const selector = document.querySelectorAll(elements);
@@ -96,7 +99,6 @@ const Lazyframe = () => {
     if (settings.lazyload) {
       initIntersectionObserver(elements);
     }
-
   }
 
   function initElement(el) {
@@ -235,9 +237,10 @@ const Lazyframe = () => {
   }
 
   function initIntersectionObserver(elements) {
-    // console.log("initIntersectionObserver");
-    const frameObserver = new IntersectionObserver((entries, frameObserver) => {
-      entries.forEach((entry) => {
+    console.log("initIntersectionObserver");
+    console.log(elements);
+    const frameObserver = new IntersectionObserver((elements, frameObserver) => {
+      elements.forEach((entry) => {
         if (entry.isIntersecting) {
           let el = entry.target;
           if (!el.settings) {
@@ -258,7 +261,7 @@ const Lazyframe = () => {
     });
 
     const lazyframes = document.querySelectorAll(elements + "[data-initinview]");
-    // console.log('lazyframes that should be initialized when in view: ', lazyframes);
+    console.log('lazyframes that should be initialized when in view: ', lazyframes);
     lazyframes.forEach(item => frameObserver.observe(item));
   }
 
@@ -267,7 +270,7 @@ const Lazyframe = () => {
     lazyframe.iframe = getIframe(lazyframe.settings);
 
     if (lazyframe.settings.thumbnail && loadImage) {
-      console.log(lazyframe.settings.thumbnail);
+      // console.log(lazyframe.settings.thumbnail);
       lazyframe.el.style.backgroundImage = `url(${lazyframe.settings.thumbnail})`;
     }
 
@@ -282,9 +285,14 @@ const Lazyframe = () => {
       lazyframe.el.appendChild(docfrag);
     }
 
-    if (!settings.lazyload) {
+    if (settings.lazyload === false) {
       lazyframe.el.classList.add('lazyframe--loaded');
       lazyframe.settings.onLoad.call(this, lazyframe);
+      elements.push(lazyframe);
+    }
+    if (settings.lazyload === true) {
+      // lazyframe.el.classList.add('lazyframe--loaded');
+      // lazyframe.settings.onLoad.call(this, lazyframe);
       elements.push(lazyframe);
     }
 

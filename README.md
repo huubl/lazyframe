@@ -56,30 +56,36 @@ npm install lazyframe-advanced
 
 ### Import
 
-JavaScript ES6 imports
+JavaScript ES6 import
 
 ```js
 import lazyframe from 'lazyframe-advanced';
-import 'lazyframe-advanced/style.css'
+import 'lazyframe-advanced/lazyframe.css'
 ```
 
-Include the library directly. Currently does not work because there is no minified standalone version. 
+[comment]: <> (Include the library directly. Currently does not work because there is no minified standalone version. )
 
-```html
-<script src="dist/lazyframe.min.js"></script>
-```
+[comment]: <> (```html)
 
-Sass import
+[comment]: <> (<script src="dist/lazyframe.min.js"></script>)
 
-```sass
-@import 'src/scss/lazyframe';
-```
+[comment]: <> (```)
 
-Include CSS in HTML
+[comment]: <> (Sass import)
 
-```html
-<link rel="stylesheet" href="dist/style.css">
-```
+[comment]: <> (```sass)
+
+[comment]: <> (@import 'src/scss/lazyframe';)
+
+[comment]: <> (```)
+
+[comment]: <> (Include CSS in HTML)
+
+[comment]: <> (```html)
+
+[comment]: <> (<link rel="stylesheet" href="dist/lazyframe.css">)
+
+[comment]: <> (```)
 
 ### Initialize
 
@@ -105,7 +111,7 @@ General options and corresponding defaults
 ```js
 lazyframe(elements, {
    apikey: enterYourApiKeyHere,
-   lazyload: true,
+   lazyload: false,
    // Callbacks
    onLoad: (lazyframe) => console.log(lazyframe),
    onAppend: (iframe) => console.log(iframe),
@@ -117,7 +123,7 @@ lazyframe(elements, {
 | option name | default value | description |
 |---|---|---|
 | apikey | string: empty | If you want to load a thumbnail and title for a YouTube video you'll have to have an API key with the YouTube data API library enabled. Get it from [here](https://console.developers.google.com/). _If you don't feel like getting a key, just use your own thumbnail and title in data-thumbnail and data-title attribute_
-| lazyload | boolean: true | Set this to `false` if you want all API calls and local images to be loaded on page load (instead of when the element is in view).
+| lazyload | boolean: false | This setting does not work right now. Set this to `false` if you want all API calls and local images to be loaded on page load (instead of when the element is in view).
 | onLoad | function: empty | Callback function for when a element is initialized. 
 | onAppend | function: empty | Callback function for when the iframe is appended to DOM. 
 | onThumbnailLoad | function: empty | Callback function with the thumbnail URL. 
@@ -149,6 +155,7 @@ Use these attributes on your HTML element like this:
 | data-initinview | boolean: true | Set this to true if you want the resource to execute (for example video to play) when the element is in view.
 
 ## Changelog
+* v1.2.3 set lazyload to false, as IntersectionObserver is not working yet
 * v1.2.0 release on npm, moved to vitejs from webpack
 * v1.1.901 betterify example page
 * v1.1.9 remove gulp and rollup and use webpack instead
