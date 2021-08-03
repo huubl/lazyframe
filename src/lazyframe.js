@@ -18,7 +18,7 @@ const Lazyframe = () => {
     apikey: undefined,
     initialized: false,
     parameters: undefined,
-    lazyload: false,
+    lazyload: true,
     initinview: false,
     onLoad: (l) => {
     },
@@ -238,7 +238,6 @@ const Lazyframe = () => {
 
   function initIntersectionObserver(elements) {
     console.log("initIntersectionObserver");
-    console.log(elements);
     const frameObserver = new IntersectionObserver((elements, frameObserver) => {
       elements.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -259,8 +258,7 @@ const Lazyframe = () => {
         }
       })
     });
-
-    const lazyframes = document.querySelectorAll(elements + "[data-initinview]");
+    const lazyframes = document.querySelectorAll(".lazyframe[data-initinview]");
     console.log('lazyframes that should be initialized when in view: ', lazyframes);
     lazyframes.forEach(item => frameObserver.observe(item));
   }

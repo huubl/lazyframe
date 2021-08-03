@@ -37,6 +37,8 @@ But there were some features missing, that we needed, so we created our own devi
 
 ###  New features that we are planning to add:
 * make it compatible with a cookie consent banner like klaro and only load the frame if consent for a specific vendor cookie is given, else display a placeholder element that you can modify by yourself
+* add thumbnail placeholder with image element instead of background element
+* overlay thumbnail with play button
 
 ## Installation Instructions
 1. [Install](#install)
@@ -155,6 +157,7 @@ Use these attributes on your HTML element like this:
 | data-initinview | boolean: true | Set this to true if you want the resource to execute (for example video to play) when the element is in view.
 
 ## Changelog
+* v1.2.4 fix IntersectionObserver
 * v1.2.3 set lazyload to false, as IntersectionObserver is not working yet
 * v1.2.0 release on npm, moved to vitejs from webpack
 * v1.1.901 betterify example page
