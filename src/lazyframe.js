@@ -2,12 +2,13 @@
 //  import ('./scss/lazyframe.scss');
 // }
 
+let elements = [];
+
 // console.log(import.meta.env.MODE);
 const Lazyframe = () => {
 
   let settings;
 
-  let elements = [];
 
   const defaults = {
     vendor: undefined,
@@ -76,29 +77,60 @@ const Lazyframe = () => {
 
   function init(elements, ...args) {
     settings = Object.assign({}, defaults, args[0]);
-    // console.log(typeof elements);
+    console.log(typeof elements);
+
+    const frameObserver = new IntersectionObserver((elements) => {
+      elements.forEach((entry) => {
+        if (entry.isIntersecting) {
+          let el = entry.target;
+          if (!el.settings) {
+            el.settings = getSettings(el);
+            el.el = el;
+            el.settings.initialized = true;
+            el.classList.add('lazyframe--loaded');
+            api(el);
+          }
+          if (el.settings.initinview) {
+            el.click();
+          }
+          el.settings.onLoad.call(this, el);
+          // const lazyImage = entry.target
+          // lazyImage.src = lazyImage.dataset.src
+        }
+      })
+    });
+
     if (typeof elements === 'string') {
 
       const selector = document.querySelectorAll(elements);
+      console.log(selector);
+      console.log(elements);
+
       for (let i = 0; i < selector.length; i++) {
         initElement(selector[i]);
       }
 
-    } else if (typeof elements.length === 'undefined') {
-      initElement(elements);
-
-    } else if (elements.length > 1) {
-
+    } else if (typeof elements === 'object') {
+      //
+      let inViewElements = []
       for (let i = 0; i < elements.length; i++) {
+        if (elements[i].hasAttribute('data-initinview')) inViewElements.push(elements[i]);
+        // inViewElements.push(elements[i].querySelector('[data-initinview]'));
         initElement(elements[i]);
       }
+      console.log(inViewElements, 'inViewElements');
+      const initInView = elements.querySelector("[data-initinview]");
+      console.log('lazyframes that should be initialized when in view: ', initInView);
+      initInView.forEach(item => frameObserver.observe(item));
 
     } else {
       initElement(elements[0]);
     }
-    if (settings.lazyload) {
-      initIntersectionObserver(elements);
-    }
+
+  }
+
+  function getInViewElements(elements) {
+    // filters a
   }
 
   function initElement(el) {
@@ -110,7 +142,6 @@ const Lazyframe = () => {
       el: el,
       settings: getSettings(el),
     };
-
     lazyframe.el.addEventListener('click', () => {
       lazyframe.el.appendChild(lazyframe.iframe);
 
@@ -120,10 +151,11 @@ const Lazyframe = () => {
 
     if (settings.lazyload) {
       build(lazyframe);
+      // initIntersectionObserver(el);
+
     } else {
       api(lazyframe, !!lazyframe.settings.thumbnail);
     }
-
   }
 
   function getSettings(el) {
@@ -234,33 +266,6 @@ const Lazyframe = () => {
 
     request.send();
 
-  }
-
-  function initIntersectionObserver(elements) {
-    console.log("initIntersectionObserver");
-    const frameObserver = new IntersectionObserver((elements, frameObserver) => {
-      elements.forEach((entry) => {
-        if (entry.isIntersecting) {
-          let el = entry.target;
-          if (!el.settings) {
-            el.settings = getSettings(el);
-            el.el = el;
-            el.settings.initialized = true;
-            el.classList.add('lazyframe--loaded');
-            api(el);
-          }
-          if (el.settings.initinview) {
-            el.click();
-          }
-          el.settings.onLoad.call(this, el);
-          // const lazyImage = entry.target
-          // lazyImage.src = lazyImage.dataset.src
-        }
-      })
-    });
-    const lazyframes = document.querySelectorAll(".lazyframe[data-initinview]");
-    console.log('lazyframes that should be initialized when in view: ', lazyframes);
-    lazyframes.forEach(item => frameObserver.observe(item));
   }
 
   function build(lazyframe, loadImage) {
