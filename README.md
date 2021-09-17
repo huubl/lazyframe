@@ -156,7 +156,7 @@ Use these attributes on your HTML element like this:
 | data-initinview | boolean: true | Set this to true if you want the resource to execute (for example video to play) when the element is in view.
 
 ## Changelog
-* v1.3.0 much new stuff and optimized demo page
+* v2.0.0 much new stuff and optimized demo page
 * v1.2.4 fix IntersectionObserver
 * v1.2.3 set lazyload to false, as IntersectionObserver is not working yet
 * v1.2.0 release on npm, uses vitejs instead of webpack
