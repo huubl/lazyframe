@@ -1,7 +1,12 @@
 // if (import.meta.env.MODE !==''){
 //  import ('./scss/lazyframe.scss');
 // }
-
+// @TODO rewrite everything, to make it easier and faster
+// some examples
+// https://www.labnol.org/internet/light-youtube-embeds/27941/
+// https://www.benjamin-mylius.de/lazy-load-fuer-embedded-youtube-videos/
+// https://github.com/justinribeiro/lite-youtube uses Shadow DOM
+// https://codepen.io/chriscoyier/pen/GRKZryx
 let elements = [];
 
 // console.log(import.meta.env.MODE);
@@ -9,17 +14,16 @@ const Lazyframe = () => {
 
   let settings;
 
-
   const defaults = {
     vendor: undefined,
     id: undefined,
     src: undefined,
     thumbnail: undefined,
     title: undefined,
-    apikey: undefined,
     initialized: false,
     parameters: undefined,
-    lazyload: true,
+    lazyload: false,
+    autoplay: true,
     initinview: false,
     onLoad: (l) => {
     },
@@ -37,125 +41,91 @@ const Lazyframe = () => {
       vimeo: /vimeo\.com\/(?:video\/)?([0-9]*)(?:\?|)/,
     },
     condition: {
-      youtube: (m) => (m && m[1].length == 11) ? m[1] : false,
-      youtube_nocookie: (m) => (m && m[1].length == 11) ? m[1] : false,
-      vimeo: (m) => (m && m[1].length === 9 || m[1].length === 8) ? m[1] : false,
+      youtube: (m) => (m && m[1].length == 11 ? m[1] : false),
+      youtube_nocookie: (m) => (m && m[1].length == 11 ? m[1] : false),
+      vimeo: (m) =>
+        (m && m[1].length === 9) || m[1].length === 8 ? m[1] : false,
     },
     src: {
-      youtube: (s) => `https://www.youtube.com/embed/${s.id}/?${s.parameters}`,
-      youtube_nocookie: (s) => `https://www.youtube-nocookie.com/embed/${s.id}/?${s.parameters}`,
-      vimeo: (s) => `https://player.vimeo.com/video/${s.id}/?${s.parameters}`,
+      youtube: (s) =>
+        `https://www.youtube.com/embed/${s.id}/?autoplay=${
+          s.autoplay ? "1" : "0"
+        }`,
+      youtube_nocookie: (s) =>
+        `https://www.youtube-nocookie.com/embed/${s.id}/?autoplay=${
+          s.autoplay ? "1" : "0"
+        }`,
+      vimeo: (s) =>
+        `https://player.vimeo.com/video/${s.id}/?autoplay=${
+          s.autoplay ? "1" : "0"
+        }`,
     },
-    endpoints: {
-      youtube: (s) => `https://www.googleapis.com/youtube/v3/videos?id=${s.id}&key=${s.apikey}&fields=items(snippet(title,thumbnails))&part=snippet`,
-      youtube_nocookie: (s) => `https://www.googleapis.com/youtube/v3/videos?id=${s.id}&key=${s.apikey}&fields=items(snippet(title,thumbnails))&part=snippet`,
-      vimeo: (s) => `https://vimeo.com/api/oembed.json?url=https%3A//vimeo.com/${s.id}`,
-    },
+    endpoint: (s) => `https://noembed.com/embed?url=${s.src}`,
     response: {
-      youtube: {
-        title: (r) => r.items['0'].snippet.title,
-        thumbnail: (r) => {
-          let thumbs = r.items['0'].snippet.thumbnails;
-          let thumb = thumbs.maxres || thumbs.standard || thumbs.high || thumbs.medium || thumbs.default;
-          return thumb.url;
-        }
-      },
-      youtube_nocookie: {
-        title: (r) => r.items['0'].snippet.title,
-        thumbnail: (r) => {
-          let thumbs = r.items['0'].snippet.thumbnails;
-          let thumb = thumbs.maxres || thumbs.standard || thumbs.high || thumbs.medium || thumbs.default;
-          return thumb.url;
-        }
-      },
-      vimeo: {
-        title: (r) => r.title,
-        thumbnail: (r) => r.thumbnail_url
-      },
-    }
+      title: (r) => r.title,
+      thumbnail: (r) => r.thumbnail_url,
+    },
   };
 
   function init(elements, ...args) {
     settings = Object.assign({}, defaults, args[0]);
-    console.log(typeof elements);
+    console.log("typof elements:", typeof elements);
 
     const frameObserver = new IntersectionObserver((elements) => {
       elements.forEach((entry) => {
         if (entry.isIntersecting) {
           let el = entry.target;
+          console.log(el.settings);
           if (!el.settings) {
             el.settings = getSettings(el);
             el.el = el;
+            getEmbedDataAndBuild(el);
             el.settings.initialized = true;
-            el.classList.add('lazyframe--loaded');
-            api(el);
+            // el.classList.add('lazyframe--loaded');
           }
+          console.log(el.settings, "settings");
           if (el.settings.initinview) {
+            console.log('I should click on ')
+            console.log(el)
             el.click();
           }
           el.settings.onLoad.call(this, el);
-          // const lazyImage = entry.target
-          // lazyImage.src = lazyImage.dataset.src
         }
       })
     });
 
     if (typeof elements === 'string') {
 
-      const selector = document.querySelectorAll(elements);
-      console.log(selector);
-      console.log(elements);
-
-      for (let i = 0; i < selector.length; i++) {
-        initElement(selector[i]);
-      }
+      const nodeList = document.querySelectorAll(elements);
+      console.log(nodeList, "nodelist");
+      console.log(elements, "elements");
+      nodeList.forEach(item => attachEventListeners(item));
+      nodeList.forEach(item => frameObserver.observe(item));
 
     } else if (typeof elements === 'object') {
-      //
-      let inViewElements = []
-      for (let i = 0; i < elements.length; i++) {
-        if (elements[i].hasAttribute('data-initinview')) inViewElements.push(elements[i]);
-        // inViewElements.push(elements[i].querySelector('[data-initinview]'));
-        initElement(elements[i]);
-      }
-      console.log(inViewElements, 'inViewElements');
-      const initInView = elements.querySelector("[data-initinview]");
-      console.log('lazyframes that should be initialized when in view: ', initInView);
-      initInView.forEach(item => frameObserver.observe(item));
 
-    } else {
-      initElement(elements[0]);
+      elements.forEach(item => attachEventListeners(item));
+      elements.forEach(item => frameObserver.observe(item));
+
     }
 
   }
 
-  function getInViewElements(elements) {
-    // filters a
-  }
 
-  function initElement(el) {
-
+  function attachEventListeners(el) {
+    console.log(el, 'attachEventListeners');
     if (!(el instanceof HTMLElement) ||
       el.classList.contains('lazyframe--loaded')) return;
 
-    const lazyframe = {
-      el: el,
-      settings: getSettings(el),
-    };
-    lazyframe.el.addEventListener('click', () => {
-      lazyframe.el.appendChild(lazyframe.iframe);
-
+    el.addEventListener('click', () => {
+      console.log('click');
+      console.log(el.iframe);
       const iframe = el.querySelectorAll('iframe');
-      lazyframe.settings.onAppend.call(this, iframe[0]);
+      // if (iframe) return;
+      el.appendChild(el.iframe);
+      el.settings.onAppend.call(this, iframe[0]);
     });
 
-    if (settings.lazyload) {
-      build(lazyframe);
-      // initIntersectionObserver(el);
-
-    } else {
-      api(lazyframe, !!lazyframe.settings.thumbnail);
-    }
   }
 
   function getSettings(el) {
@@ -201,36 +171,27 @@ const Lazyframe = () => {
   }
 
   function useApi(settings) {
-
+    console.log("useApi", settings.vendor);
     if (!settings.vendor) return false;
-
-    if (!settings.title || !settings.thumbnail) {
-      if (settings.vendor === 'youtube' || settings.vendor === 'youtube_nocookie') {
-        return !!settings.apikey;
-      } else {
-        return true;
-      }
-
-    } else {
-      return false;
-    }
-
+    return !settings.title || !settings.thumbnail;
   }
 
-  function api(lazyframe) {
-    // console.log(lazyframe.settings);
+  function getEmbedDataAndBuild(lazyframe) {
+
     if (useApi(lazyframe.settings)) {
-      send(lazyframe, (err, data) => {
+      queryNoembed(lazyframe, (err, data) => {
         if (err) return;
 
         const response = data[0];
         const _l = data[1];
 
         if (!_l.settings.title) {
-          _l.settings.title = constants.response[_l.settings.vendor].title(response);
+          _l.settings.title = constants.response.title(response);
         }
         if (!_l.settings.thumbnail) {
-          const url = constants.response[_l.settings.vendor].thumbnail(response);
+          let url = constants.response.thumbnail(response);
+          // console.log(url, "thumbnail url");
+          // url = url.replace('hqdefault', 'maxresdefault');
           _l.settings.thumbnail = url;
           lazyframe.settings.onThumbnailLoad.call(this, url);
         }
@@ -244,9 +205,9 @@ const Lazyframe = () => {
 
   }
 
-  function send(lazyframe, cb) {
+  function queryNoembed(lazyframe, cb) {
 
-    const endpoint = constants.endpoints[lazyframe.settings.vendor](lazyframe.settings);
+    const endpoint = constants.endpoint(lazyframe.settings);
     const request = new XMLHttpRequest();
 
     request.open('GET', endpoint, true);
@@ -269,8 +230,9 @@ const Lazyframe = () => {
   }
 
   function build(lazyframe, loadImage) {
-
-    lazyframe.iframe = getIframe(lazyframe.settings);
+    console.log('build', lazyframe)
+    lazyframe.iframe = createIframe(lazyframe.settings);
+    console.log(lazyframe.iframe, "der iframe");
 
     if (lazyframe.settings.thumbnail && loadImage) {
       // console.log(lazyframe.settings.thumbnail);
@@ -288,16 +250,16 @@ const Lazyframe = () => {
       lazyframe.el.appendChild(docfrag);
     }
 
-    if (settings.lazyload === false) {
-      lazyframe.el.classList.add('lazyframe--loaded');
-      lazyframe.settings.onLoad.call(this, lazyframe);
-      elements.push(lazyframe);
-    }
-    if (settings.lazyload === true) {
-      // lazyframe.el.classList.add('lazyframe--loaded');
-      // lazyframe.settings.onLoad.call(this, lazyframe);
-      elements.push(lazyframe);
-    }
+    // if (settings.lazyload === false) {
+    // lazyframe.el.classList.add('lazyframe--loaded');
+    // lazyframe.settings.onLoad.call(this, lazyframe);
+    // elements.push(lazyframe);
+    // }
+    // if (settings.lazyload === true) {
+    //   // lazyframe.el.classList.add('lazyframe--loaded');
+    //   // lazyframe.settings.onLoad.call(this, lazyframe);
+    //   elements.push(lazyframe);
+    // }
 
     if (!lazyframe.settings.initialized) {
       elements.push(lazyframe);
@@ -305,10 +267,10 @@ const Lazyframe = () => {
 
   }
 
-  function getIframe(settings) {
+  function createIframe(settings) {
 
-    const docfrag = document.createDocumentFragment(),
-      iframeNode = document.createElement('iframe');
+    const docfrag = document.createDocumentFragment();
+    const iframeNode = document.createElement('iframe');
 
     if (settings.vendor) {
       settings.src = constants.src[settings.vendor](settings);
@@ -319,6 +281,10 @@ const Lazyframe = () => {
     iframeNode.setAttribute('frameborder', 0);
     iframeNode.setAttribute('allowfullscreen', '');
 
+    if (settings.autoplay) {
+      iframeNode.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';
+    }
+
     docfrag.appendChild(iframeNode);
     return docfrag;
 
@@ -326,7 +292,7 @@ const Lazyframe = () => {
 
   return init;
 
-};
+}
 
 const lazyframe = Lazyframe();
 window.lazyframe = Lazyframe();
