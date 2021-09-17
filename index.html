@@ -3,7 +3,8 @@
 
 <head>
   <meta charset="utf-8">
-  <title>LazyframeAdvanced Demo</title>
+  <title>LazyframeAdvanced - Lazyload your iframes - dependency-free library</title>
+  <meta name="description" content="a dependency-free library to lazyload iframes and save bandwidth and memory">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="dist/lazyframe.css">
   <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2.0/dist/tailwind.min.css">
@@ -36,8 +37,8 @@
       width: 100%;
       display: block;
       font-size: 32px;
-      font-family: Arial;
-      color: #fff;
+      color: #000000;
+      text-shadow: 10px 1px 0 rgba(255, 255, 255, .06);
     }
 
     .lazyframe--custom::before {
@@ -47,128 +48,205 @@
 </head>
 
 <body class="overflow-x-hidden font-sans antialiased text-gray-900 bg-white">
-  <main>
-    <!-- start hero section -->
-    <section class="bg-blue-500 md:text-center pb-10 pt-10 px-4 relative text-center text-white">
-      <div>
-        <h1 class="text-5xl font-bold leading-tight">LazyframeAdvanced</h1>
-        <p class="mt-4">Dependency-free library for lazyloading iframes</p>
-        <p class="mt-4"><a href="https://jmartsch.github.io/lazyframeAdvanced">https://jmartsch.github.io/lazyframeAdvanced</a></p>
-      </div>
-    </section>
-    <!-- end hero section -->
-    <!-- start how it works -->
-    <section class="bg-gray-100 px-4 py-16 text-center">
-      <div class="container">
-      <h2 class="text-2xl font-bold leading-tight lg:text-3xl">How it works</h2>
-      <p class="mt-5 mt-5 text-2xl text-center">Lazyframe creates a responsive placeholder for embedded content and only
-        requests it when the user
-        interacts with
-        it. This decreases the page load and idle time. Lazyframe comes with brand-like themes for YouTube, Vimeo and
-        Vine.</p>
-      <h2 class="text-2xl font-bold leading-tight lg:text-3xl mt-10">Why?</h2>
-      <p class="mt-5 mt-5 text-2xl text-center">Because the JavaScript loaded from the external providers is big and
-        takes much time to load. This
-        slows down your site, even if your visitors don't want to see your beautiful videos.
-      </p>
-      <p>For example here are the number of requests and filesizes of some well-known services.</p>
-      <ul class="list-unstyled mt-10">
-        <li>
-          YouTube – 11 requests ≈ 580kb
-        </li>
-        <li>
-          Google maps – 52 requests ≈ 580kb
-        </li>
-        <li>
-          Vimeo – 8 requests ≈ 145kb
-        </li>
-      </ul>
-      </div>
-    </section>
-    <!-- end how it works -->
-    <section class="bg-blue-300 p-10 text-center">
-      <div class="container">
+<main>
+  <section
+    class="px-0 pt-48 pb-0 m-0 leading-6 text-gray-900 box-border md:pt-40 bg-blue-500"
+    id="home"
+  >
+    <div class="p-0 my-0 mx-auto w-full text-gray-900 box-border bg-blue">
+      <div class="flex flex-wrap p-0 m-0 box-border">
+        <div
+          class="flex-shrink-0 p-0 m-0 w-full max-w-full lg:flex-none lg:w-full box-border"
+        >
+          <div
+            class="visible p-0 mx-auto mt-auto mb-8 box-border"
+            data-wow-delay=".2s"
+            style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp; max-width: 780px;"
+          >
+            <h1
+              class="p-0 mx-0 mt-0 mb-8 text-5xl font-bold text-center box-border  text-white"
+              style="line-height: 60px;"
+            >
+              Lazyframe Advanced
+            </h1>
+            <p
+              class="p-0 mx-auto mt-auto mb-8 text-xl font-normal leading-9 text-center box-border text-white"
 
-      <h2 class="text-2xl font-bold leading-tight lg:text-3xl">Examples</h2>
-      <div class="mt-8 md:flex">
-        <div class="w-full  bg-white  shadow-lg sm:w-1/2 sm:mx-2 lg:mx-6">
-          <div class="lazyframe" data-src="https://www.youtube.com/watch?v=_y1YHBG_XAc" data-vendor="youtube">
+            >
+              a dependency-free library to lazyload iframes and save bandwidth and memory
+            </p>
+            <ul
+              class="flex justify-center items-center py-0 pr-0 pl-8 mx-0 mt-0 mb-4 list-none box-border"
+              style="list-style: outside none none;"
+            >
+              <li
+                class="p-0 m-0 text-left box-border"
+                style="list-style: outside none none;"
+              >
+                <a
+                  href="#installation"
+                  rel="nofollow noopener"
+                  target="_blank"
+                  class="inline-block py-4 px-6 m-2 text-base font-medium text-center text-blue-600 underline align-middle rounded border border-transparent border-solid shadow-none cursor-pointer box-border whitespace-no-wrap bg-white hover:bg-yellow-300 hover:shadow-xs hover:text-blue-700 no-underline focus:shadow-none focus:no-underline"
+                  style="transition: all 0.4s ease-out 0s; outline: none; z-index: 5; list-style: outside none none;"
+                >
+                  Installation
+                </a>
+              </li>
+              <li
+                class="p-0 m-0 text-left box-border"
+                style="list-style: outside none none;"
+              >
+                <a
+                  href="https://jmartsch.github.io/lazyframeAdvanced"
+                  rel="nofollow noopener"
+                  target="_blank"
+                  class="inline-block py-4 px-6 m-2 text-base font-medium text-center text-blue-600 underline align-middle rounded border border-transparent border-solid shadow-none cursor-pointer box-border whitespace-no-wrap bg-white hover:bg-yellow-300 hover:shadow-xs hover:text-blue-700 no-underline focus:shadow-none focus:no-underline"
+                  style="transition: all 0.4s ease-out 0s; outline: none; z-index: 5; list-style: outside none none;"
+                >
+                  GitHub Repo
+                </a>
+              </li>
+            </ul>
           </div>
-          <div class="px-4 py-8">
-            <h4 class="text-lg font-bold tracking-wide">Embed YouTube video with thumbnail and title from
-              API
-            </h4>
+
+          <div
+            class="relative visible p-0 m-auto text-center box-border"
+            data-wow-delay=".25s"
+            style="visibility: visible; animation-delay: 0.25s; animation-name: fadeInUp; max-width: 845px; z-index: 1;"
+          >
+            <img
+              src="images/hero-image.jpg"
+              alt="hero-image"
+              class="p-0 m-0 max-w-full align-middle box-border"
+            />
+            <img
+              src="images/dotted-shape.svg"
+              alt="shape"
+              class="absolute bottom-0 p-0 m-0 max-w-full align-middle box-border"
+              style="z-index: -1; left: -30px;"
+            />
+            <img
+              src="images/dotted-shape.svg"
+              alt="shape"
+              class="absolute p-0 m-0 max-w-full align-middle box-border"
+              style="z-index: -1; top: -20px; right: -20px;"
+            />
           </div>
         </div>
-        <div class="w-full bg-white shadow-lg sm:w-1/2 sm:mx-2 lg:mx-6 mt-5 md:mt-0">
+      </div>
+    </div>
+  </section>
+
+  <div class="p-0 mx-auto mt-20 mb-16 leading-6 text-center text-gray-600 box-border max-w-xl">
+    <h2 class="p-0 mx-0 mt-0 mb-5 text-4xl font-bold xl:text-3xl box-border">
+      Why would you use it?
+    </h2>
+    <p class="mt-5 mt-5 text-2xl text-center">JavaScripts loaded from external providers like YouTube or Vimeo or Google Maps are big and waste precious bandwidth (especially on mobile). This slows down the loading of your website, even if your visitors don't want to see your beautiful videos or embeds.
+    </p>
+    <p class="mt-10">For example here are the number of requests and filesizes of some well-known services:</p>
+    <ul class="list-unstyled mt-10">
+      <li>
+        YouTube – 11 requests ≈ 1099kb (over a megabyte) 😲
+      </li>
+      <li>
+        Google maps – 52 requests ≈ 520kb 😲
+      </li>
+      <li>
+        Vimeo – 8 requests ≈ 232kb 😲
+      </li>
+    </ul>
+  </div>
+
+  <div class="p-0 mx-auto mt-0 mb-16 leading-6 text-center text-gray-600 box-border max-w-xl text-xl font-normal leading-7">
+    <h2 class="p-0 mx-0 mt-0 mb-5 text-4xl font-bold  xl:text-3xl box-border">
+      What does it do?
+    </h2>
+    <p class="">LazyframeAdvanced creates a responsive placeholder (and a placholder image from noembed.com or your custom one) for embedded content and only requests its content and scripts when the user interacts with it. </p>
+    <p class="mt-10">This decreases the page load and idle time. LazyframeAdvanced comes with brand-like themes for YouTube and Vimeo.</p>
+    <p>The thumnail placeholder is only loaded when the frame is in view, this saves additional bandwidth.
+    </p>
+  </div>
+
+
+  <section class="bg-blue-100 p-10 text-center">
+    <div class="container max-w-xl">
+      <h2 class="text-2xl font-bold leading-tight lg:text-3xl">Examples</h2>
+      <div class="mt-8">
+        <div class="w-full  bg-white  shadow-lg ">
+          <div class="lazyframe" data-src="https://www.youtube.com/watch?v=Urj7Uw4TodA" data-vendor="youtube">
+          </div>
+          <div class="px-4 py-8">
+            <h4 class="text-lg font-bold tracking-wide">YouTube video with thumbnail and title from noembed.com</h4>
+          </div>
+        </div>
+        <div class="w-full bg-white shadow-lg mt-10">
           <div>
-            <div class="lazyframe" data-src="https://www.youtube.com/watch?v=_y1YHBG_XAc" data-vendor="youtube"
-              data-title="Custom title" data-thumbnail="https://placekitten.com/500/281">
+            <div class="lazyframe" data-src="https://www.youtube.com/watch?v=Urj7Uw4TodA" data-vendor="youtube"
+              data-title="custom title for Dream Fiend - Lightyears (feat. September 87)" data-thumbnail="images/80placeholder.jpg">
             </div>
-            <h4 class="px-4 py-8 text-lg font-bold tracking-wide">Embed YouTube video with custom preview image and
+            <h4 class="px-4 py-8 text-lg font-bold tracking-wide">YouTube video with custom thumbnail image and
               custom title</h4>
           </div>
         </div>
       </div>
-      <div class="mt-8 md:flex">
-        <div class="w-full bg-white  shadow-lg sm:w-1/2 sm:mx-2 lg:mx-6">
-          <div>
-            <div class="lazyframe" data-src="https://vimeo.com/45915667" data-vendor="vimeo">
-            </div>
+      <div class="w-full bg-white shadow-lg mt-10">
+        <div>
+          <div class="lazyframe" data-src="https://vimeo.com/295809481" data-vendor="vimeo">
           </div>
-          <h4 class="px-4 py-8 text-lg font-bold tracking-wide">Embed Vimeo video with thumbnail and title from
-            API
-          </h4>
         </div>
-        <div class="w-full bg-white  shadow-lg sm:w-1/2 sm:mx-2 lg:mx-6 mt-5 md:mt-0">
-          <div>
-            <div class="lazyframe" data-src="https://www.youtube.com/watch?v=_y1YHBG_XAc" data-vendor="youtube"
-              data-title="Custom title" data-thumbnail="https://placekitten.com/500/281">
-            </div>
-            <h4 class="px-4 py-8 text-lg font-bold tracking-wide">Embed Vimeo video with custom thumbnail and
-              title
+        <h4 class="px-4 py-8 text-lg font-bold tracking-wide">Vimeo video with thumbnail and title from
+          noembed.com
+        </h4>
+      </div>
+      <div class="w-full bg-white  shadow-lg mt-10">
+        <div>
+          <div class="lazyframe lazyframe--custom"
+            data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2458.7759635643474!2d7.670786116333327!3d51.95627678560363!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b9bb46d9040ea7%3A0xdb9a83d22fdc0e67!2sIm%20Drostebusch%2C%2048155%20M%C3%BCnster!5e0!3m2!1sde!2sde!4v1629887007748!5m2!1sde!2sde"
+            data-thumbnail="https://maps.googleapis.com/maps/api/js/StaticMapService.GetMapImage?1m2&1i8745931&2i5544812&2e1&3u16&4m2&1u528&2u528&5m5&1e0&5sde&6sde&10b1&12b1&client=google-maps-embed&token=102294"
+            data-title="Click me to load Google Maps">
+          </div>
+          <div class="px-4 py-8">
+            <h4 class="text-lg font-bold tracking-wide">Google maps iframe with static placeholder image
             </h4>
           </div>
         </div>
       </div>
-      <div class="mt-8 md:flex">
-        <div class="w-full  bg-white  shadow-lg sm:w-1/2 sm:mx-2 lg:mx-6">
-          <div>
-            <div class="lazyframe lazyframe--custom"
-              data-src="https://www.surveymonkey.com/r/?sm=%2bd%2bdWobuoz7irMV%2fpzKPcJmrKosuGWSraJtIrFQ4wBQ%3d"
-              data-title="Click me, to load the iFrame">
-            </div>
-          </div>
-          <h4 class="px-4 py-8 text-lg font-bold tracking-wide">Custom Iframe
-          </h4>
-        </div>
-        <div class="w-full bg-white  shadow-lg sm:w-1/2 sm:mx-2 lg:mx-6 mt-5 md:mt-0">
-          <div>
-            <div class="lazyframe lazyframe--custom"
-              data-src="https://www.youtube.com/watch?v=_y1YHBG_XAc"
-              data-title="Something completely different" data-initinview="true">
-            </div>
-            <div class="px-4 py-8">
-              <h4 class="text-lg font-bold tracking-wide">Google maps iframe with custom thumbnail and
-                title that gets executed when in view
-              </h4>
-            </div>
+      <div class="w-full  bg-white  shadow-lg mt-10">
+        <div>
+          <div class="lazyframe lazyframe--custom"
+            data-src="https://www.surveymonkey.com/r/?sm=%2bd%2bdWobuoz7irMV%2fpzKPcJmrKosuGWSraJtIrFQ4wBQ%3d"
+            data-title="Click me, to load the iframe">
           </div>
         </div>
+        <h4 class="px-4 py-8 text-lg font-bold tracking-wide">Custom iframe with a Surveymonkey form
+        </h4>
       </div>
+      <div class="w-full bg-white  shadow-lg mt-10">
+
+        <h4 class="px-4 py-8 text-lg font-bold tracking-wide">This video from vimeo has the data-initinview parameter set to to true, so it autoplays, when it enters the viewport
+        </h4>
+        <div class="lazyframe" data-src="https://www.youtube.com/watch?v=Urj7Uw4TodA" data-vendor="youtube"
+          data-thumbnail="https://placekitten.com/500/281" data-initinview="true">
+        </div>
       </div>
-    </section>
-    <!-- start cta -->
-    <section class="px-4 py-12 text-center bg-white lg:px-16 md:px-8 xl:px-24 xxl:px-40">
-      <div class="container">
-        <h2 class="text-2xl font-bold lg:text-3xl ">Need Help? Found a bug?</h2>
-        <p class="w-full mx-auto mt-6 text-base text-gray-700 lg:w-1/2">File an <a href="https://github.com/jmartsch/lazyframeAdvanced/issues"
-                class="font-semibold text-blue-500">issue on GitHub</a></p>
-      </div>
-    </section>
-    <!-- end cta -->
-  </main>
-  <script type="module" src="src/init.js"></script>
+
+
+    </div>
+  </section>
+  <!-- start cta -->
+  <section class="px-4 py-12 text-center bg-white lg:px-16 md:px-8 xl:px-24 xxl:px-40">
+    <div class="container">
+      <h2 class="text-2xl font-bold lg:text-3xl ">Need Help? Found a bug?</h2>
+      <p class="w-full mx-auto mt-6 text-base text-gray-700 lg:w-1/2">File an
+        <a href="https://github.com/jmartsch/lazyframeAdvanced/issues"
+          class="font-semibold text-blue-500">issue on GitHub</a>
+      </p>
+    </div>
+  </section>
+  <!-- end cta -->
+</main>
+<script type="module" src="src/init.js"></script>
 </body>
 
 </html>
