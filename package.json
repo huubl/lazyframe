@@ -12,7 +12,7 @@
     }
   },
   "version": "1.2.4",
-  "description": "Dependency-free library for lazyloading iframes",
+  "description": "Lazyload iframes - dependency-free library",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jmartsch/lazyframeAdvanced.git"
@@ -36,7 +36,7 @@
   "homepage": "https://jmartsch.github.io/lazyframeAdvanced/",
   "scripts": {
     "scss-compile": "node-sass-chokidar src/scss/ -o dist/",
-    "dev": "cross-env NODE_ENV=development vite --host 0.0.0.0",
+    "dev": "cross-env NODE_ENV=development vite --host 0.0.0.0 --force",
     "build": "cross-env NODE_ENV=production vite build && npm run scss-compile",
     "serve": "vite preview",
     "test": "echo \"No test specified\"",
