@@ -26,19 +26,22 @@ LazyframeAdvanced comes with brand-like themes for YouTube and other services.
 The original [Lazyframe library](https://github.com/vb/lazyframe) from [Viktor Bergehall](https://github.com/vb) is good as it is.
 But there were some features missing, that we needed, so we created our own deviation.
 
-#### What did we add
+#### What we enhanced
 
 * use IntersectionObserver instead of the old and slow scroll event listener
+* lazyload is the default behaviour
 * move to a modern and fast build stack with vite
-* added codepen as a vendor 
-* remove vine, as it does not exist anymore
+* added codepen as a vendor
+* removed vine, as it does not exist anymore
 * add aspect ratios for the placeholders
 
 
 ###  New features that we are planning to add:
-* make it compatible with a cookie consent banner like klaro and only load the frame if consent for a specific vendor cookie is given, else display a placeholder element that you can modify by yourself
+* make it compatible with a cookie consent tool and only load the frame if consent for a specific vendor cookie is given, else display a placeholder element that you can modify by yourself
 * add thumbnail placeholder with image element instead of background element
 * overlay thumbnail with play button
+* add style for Google Maps placeholder
+* automatically add data-vendor based on URL
 
 ## Installation Instructions
 1. [Install](#install)
@@ -157,9 +160,10 @@ Use these attributes on your HTML element like this:
 | data-initinview | boolean: true | Set this to true if you want the resource to execute (for example video to play) when the element is in view.
 
 ## Changelog
+* v1.3.0 much new stuff and optimized demo page
 * v1.2.4 fix IntersectionObserver
 * v1.2.3 set lazyload to false, as IntersectionObserver is not working yet
-* v1.2.0 release on npm, moved to vitejs from webpack
+* v1.2.0 release on npm, uses vitejs instead of webpack
 * v1.1.901 betterify example page
 * v1.1.9 remove gulp and rollup and use webpack instead
     * use Babel 7
@@ -174,7 +178,7 @@ Use these attributes on your HTML element like this:
 * make your changes in the script or the scss file
   
 ##Development server with live reload
-
+ 
 Use `npm run dev` to run a server with HMR. It uses vite https://vitejs.dev/ which includes the script as a JS module in modern browsers.
 
 ## License
