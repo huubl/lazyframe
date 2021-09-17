@@ -115,8 +115,6 @@ General options and corresponding defaults
 
 ```js
 lazyframe(elements, {
-   apikey: enterYourApiKeyHere,
-   lazyload: false,
    // Callbacks
    onLoad: (lazyframe) => console.log(lazyframe),
    onAppend: (iframe) => console.log(iframe),
@@ -127,8 +125,6 @@ lazyframe(elements, {
 
 | option name | default value | description |
 |---|---|---|
-| apikey | string: empty | If you want to load a thumbnail and title for a YouTube video you'll have to have an API key with the YouTube data API library enabled. Get it from [here](https://console.developers.google.com/). _If you don't feel like getting a key, just use your own thumbnail and title in data-thumbnail and data-title attribute_
-| lazyload | boolean: false | This setting does not work right now. Set this to `false` if you want all API calls and local images to be loaded on page load (instead of when the element is in view).
 | onLoad | function: empty | Callback function for when a element is initialized. 
 | onAppend | function: empty | Callback function for when the iframe is appended to DOM. 
 | onThumbnailLoad | function: empty | Callback function with the thumbnail URL. 
